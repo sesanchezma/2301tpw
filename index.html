@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="has-dark-background" style="background-color: #00305d; position: absolute; left: 0%; top: 0%; height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+**Simplified (Epistemically) Rational Reasoning**
+
+_Workshop in Theoretical Philosophy_ 
+
+Sebastián Sánchez Martínez | TU Dresden
+
+January 19, 2023
+
+<i class="fas fa-circle-notch fa-pulse fa-1x"></i>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #b9acd4; position: absolute; left: 10%; top: 10%; height: 80%; width: 80%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+# Plan
+
+1. What is Simplified Reasoning?
+2. What is Epistemic Rationality?
+3. Is Simplified Reasoning (Epistemically) Rational?
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### What is Simplified Reasoning?
+
+Simplified reasoning is usually mentioned in accounts of practical decision-making in which several aspects of different possible actions are to be considered.
+</div>
+
+<aside class="notes"><ul>
+<li>In this section I want to convince you that the reasoning problems I have in mind are best modelled as cognitive decision problems.</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+Take this example from [Gilbert Harman (1956)](https://philpapers.org/rec/JOHCIV):
+
+<i class="fas fa-quote-left fa-2x fa-pull-left"></i>
+
+suppose one is deciding between two courses of action, A and B, knowing everything about each act and its consequences [...] The idea is to make two lists, a list of the relevant factors favoring A and a list of the factors favoring B. Then one should try to find factors on list A that can be equated with factors on list B. When this is done, one is to strike out the equivalent sets of factors, then try again with the remaining factors, continuing until the problem has been simplified to the point at which it leaves a comparison whose elements can be placed vividly in one's mind at the same time. (101)
+
+<!-- .element: style="font-size: 29px; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly" align="justify" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Simplified Decision between A and B
+
+<img src="https://i.imgur.com/Ux5gzuk.jpg" alt="" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+Simplification has something to do with:
+- Eliminating equivalent options
+- Make the decision problem tractable
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### In epistemology
+
+- Instead of practical options in action, you face cognitive options for doxastic states.
+- **Practical Demands Account:** Simplification in doxastic states is triggered by practical demands (Bratman, 1992).
+- **Cognitive Limitations Account:** Resulting doxastic states are constrained by cognitive limitations (Ross & Schroeder, 2014; Tang, 2015; Staffel, 2019).
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### example: cheap host
+
+<img src="https://i.imgur.com/pi5D4nJ.jpg" alt="" style="width: 700px; object-fit: fill">
+
+
+<p style="font-size:10px"> shoutouts to <a href="https://unsplash.com/photos/DHYfjAe_eeo">jessica loaiza</a> on unsplash! </p>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="callout callout-color8">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-list" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+Example: Cheap Host
+
+</div>
+</div>
+<div class="callout-content">
+
+It's Friday night and you came out late from work. You're shopping the last ingredients for your dinner party, and want to offer some chocolate candies that you know your guests will love after dinner. You face two options in the supermarket. Brand A sells 150 chocolate candies for 1.49€ and Brand B sells 250 for 2.48€. You know that 150 are more than enough for your 4 guests. But you want to buy the cheapest. Which one is the cheapest?
+
+- Option 1: Brand A is the cheapest because it's 1.49€
+
+- Option 2: Brand B is the cheapest because: `$\boxed{\frac {1.49€} {150}= 0.00993€/{\text{unit}}}> \boxed{\frac {2.48€} {250}= 0.00992€/{\text{unit}}}$`
+
+</div>
+</div>
+<!-- .element: style="font-size: 30px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Practical Demands Account - [Bratman (1992)](https://philpapers.org/rec/BRAPRA)
+
+- We need to "economize in our use of scarce reasoning resources" (p. 5)
+- We take for granted in some contexts things that in other contexts are not taken for granted.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- Practical pressures favor simplification, but the lack thereof could counter against simplification.
+	- Context 1: Cheap Host. <!-- .element: style="font-size: 32px" -->
+	- Context 2: Cheap Host is offered a bet about which brand is cheapest. A precise definition of what 'cheapest' means could ensue, and, depending on the operative definition, some calculation.<!-- .element: style="font-size: 32px" -->
+- In **Context 1**, but not in **Context 2**, the resulting doxastic state about the proposition _Brand A is the cheapest_ (_Cheap A_) could be that of <span style="text-decoration:underline;">acceptance.</span>
+	- You accept _Cheap A_ in **Context 1**, but not in **Context 2**.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Upshot of Practical Demands Account
+
+The practical demands account concentrates on doxastic attitudes insofar as they are inputs of practical reasoning.
+
+The point being that sometimes *belief* and sometimes *acceptance* is the doxastic attitude we take towards the propositions we put into practical reasoning.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Cognitive demands account - [Ross&Schroeder (2014)](https://philpapers.org/rec/ROSBCA-4)
+
+- In theoretical and practical reasoning, agents have automatic, defeasible dispositions to treat certain propostitions as true.
+- Which propostitions? Those about which we are uncertain.
+- Why these? Because uncertainties are modeled as probabilistic. And that complicates reasoning!
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- Uncertainties enter decision problems as probabilities of the states of nature.
+- Agent's actions have consecuences only insofar as they are measured against those states of nature.
+- How to act? Consider: It depends on what actually happens.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### example: cheap parking
+
+<img src="attachments/car.jpg" alt="" style="width: 700px; object-fit: fill">
+
+<p style="font-size:10px; ">shoutouts to <a href="https://unsplash.com/@dmey503?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">dan meyers</a> on <a href="https://unsplash.com/photos/XZQacH1x1rE?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">unsplash!</a> </p>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="callout callout-color8">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-list" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+Example: Cheap Parking
+
+</div>
+</div>
+<div class="callout-content">
+
+As I am in moving apartments, I know that parking in the paid-parking zone outside my apartment is gonna take less than 10 minutes every time, so I think it's unlikely that the tow truck will have time to show up, leave me a fine and take my car.
+
+My reasoning is: If I park there, it will cost me 2€ every time. During the day, I expect to spend 20€ in total. But I know that the tow truck might come if I park without paying, so it will cost me 350€ in fines, 100€ in recovery costs, and 200€ for the sure damages to my car, for a total of 650€.
+
+
+
+</div>
+</div>
+<!-- .element: style="font-size: 20px" -->
+
+<table>  
+  <tr>  
+    <th>Acts / States</th>  
+    <th><i> S: </i>Tow Truck Shows Up</th><!-- .element: style="font-size: 24px" -->    
+    <th><i>¬S: </i>Tow Truck Doesn't Show Up</th><!-- .element: style="font-size: 24px" -->  
+  </tr>  
+  <tr>  
+    <td>Pay</td>  
+    <td>Pay 20€, no fine</td><!-- .element: style="font-size: 20px" -->  
+    <td>Pay 20€, no fine</td><!-- .element: style="font-size: 20px" -->
+  </tr>  
+  <tr>  
+    <td>Don't Pay</td>  
+    <td>Pay 650€ in fines, recovery costs and damages</td><!-- .element: style="font-size: 20px" -->  
+    <td>Pay 0€</td><!-- .element: style="font-size: 20px" -->
+  </tr>  
+</table><!-- .element: style="font-size: 30px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### cheap parking
+
+- The value of action depends on what state of the world obtains: whether the tow truck shows up or not.
+- This is uncertain, so I am not going to take for granted neither _S_ nor _¬S_ and I assign probabilities to each one.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="callout callout-color2">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-fire-alt" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+But notice:
+
+</div>
+</div>
+<div class="callout-content">
+
+- The set of alternative possibilities {S, ¬S} can be arbitrarily expanded to include many other possibilities to which I reasonably assign non-zero chance.
+
+- Maybe the fines are lower, maybe this week the transit law completely overthrew fines, maybe my neighborhood is under amnesty, maybe the IT systems will not charge me because of a massive failure today...
+
+- The point being: I need to take for granted that some of these will not obtain and by acting the way I do I am also taking for granted ¬S.
+
+- This is where simplified reasoning kicks in, according to [Ross&Schroeder (2014)](https://philpapers.org/rec/ROSBCA-4): we are automatically disposed to take uncertainties for granted so that its role is occupied by certainties instead.
+
+</div>
+</div>
+<!-- .element: style="font-size: 30px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# in theoretical reasoning...
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### example: tennis match
+
+<img src="attachments/tennis.jpg" alt="" style="width: 700px; object-fit: fill">
+
+<p style="font-size:10px">shoutouts to <a href="https://unsplash.com/@joshcala?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">josh calabrese</a> on <a href="https://unsplash.com/photos/zcYRw547Dps?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">unsplash!</a> </p>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="callout callout-color8">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-list" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+Example: Tennis Match (modified) from [Staffel, 2019](https://philpapers.org/rec/STAHDB)
+
+</div>
+</div>
+<div class="callout-content">
+
+I need to know the rain-probability for a tennis match I was invited. But, busy and forgetful as I am, I don’t remember where the match is going to be. So, confused, I ask myself ‘Where is the match going to be?’, and I narrow it down to three options: Glasgow (`$GLA$`), Hamburg (`$HAM$`) and Madrid (`$MAD$`). For each option, I have the following credences:
+
+`$C(GLA) = 0.48$`
+
+`$C(HAM) = 0.48$`
+
+`$C(MAD) = 0.04$`
+
+**Question:** How to calculate the probability of the proposition that _it will rain during the match (`$r$`)_?
+
+We need some `$C(r)$` conditional on the match happening in each city, so let's assume the following:
+
+`$C(r | GLA) = 0.7$`
+
+
+
+`$C(r| HAM) = 0.9$`
+
+
+
+`$C(r | MAD) = 0.1$`
+
+</div>
+</div>
+<!-- .element: style="font-size: 20px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+**Question:** How to get to a credence about whether or not _It will rain during the tennis match (r)_, or `$C(r)$`?
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Two Possible Routes
+
+<div class="" style="position: absolute; left: 0%; top: 5%; height: 15%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+#### Two Possible Routes
+</div>
+
+<div class="has-light-background" style="background-color: #F4B5C7; position: absolute; left: 0%; top: 25%; height: 50%; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+
+##### route 1
+`$\tiny \begin{equation} \tag{1} \begin{split}  C(r)&=C(r | GLA)\times C(GLA)  \\ &+ C(r| HAM)\times C(HAM) \\ &+ C(r | MAD)\times C(MAD) \\ &=0.772\end{split} \end{equation}$`
+
+</div>
+
+<div class="has-light-background" style="background-color: #BEE5B0; position: absolute; left: 50%; top: 25%; height: 50%; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+##### route 2
+`$\tiny \begin{equation} \tag{2.1} \begin{split} &C(GLA) = 0.48 \\ &C(HAM) = 0.48 \\ &\xcancel{C(MAD) =0.04}\end{split}\end{equation}$`
+`$\tiny\begin{equation} \tag{2.2} \begin{split}\\ C(r)&=C(r | GLA)\times C(GLA)  \\ &+ C(r| HAM)\times C(HAM) \\ &=0.8 \end{split}\end{equation}$`
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### [Staffel, 2019](https://philpapers.org/rec/STAHDB)
+
+<i class="fas fa-quote-left fa-2x fa-pull-left"></i>This example is a very simple illustration of the general idea that reducing the number of possibilities under consideration simplifies reasoning problems, both of the theoretical and the practical kind. This observation helps explain why it makes sense for limited human reasoners to have outright beliefs in addition to credences: outright beliefs let us eliminate improbable options from consideration in framing reasoning problems, thus making them easier to solve.</span> (5)
+
+<!-- .element: style="font-size: 29px; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly" align="justify" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Why Route 2 is SR?
+
+- It makes the reasoning problem more tractable.
+	- A notion of improbable options in reasoning is assumed.
+	- Some cognitive work is required to discard an option.
+- It is assumed by both [Ross&Schroeder (2014)](https://philpapers.org/rec/ROSBCA-4) and [Staffel, 2019](https://philpapers.org/rec/STAHDB) that beliefs, as opposed to credences, are the doxastic state in charge of simplification.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Upshot of Cognitive Limitations Accounts
+
+- You don't have to be convinced that beliefs or acceptances are the result of SR.
+- You just need acknowledge that SR is something we do and that
+	- It deals initially with complicated things like credences.
+	- It gets rid of complications by screening off options in cognitive decisions 
+	- It affects only minimally the results of the reasoning: we could have otherwise reasoned in a much more complicated way, but the results wouldn't be much different.
+
+<!-- .element: style="font-size: 29px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# 📍
+
+<img src="attachments/map.jpg" alt="" style="width: 300px; object-fit: fill">
+
+ 
+<p style="font-size:10px">shoutouts to <a href="https://unsplash.com/@tamas_tuzeskatai?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">tamas tuzes-katai</a> on <a href="https://unsplash.com/photos/rEn-AdBr3Ig?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">unsplash!</a> </p>
+
+notes:
+# taking stock
+- Different factors trigger simplification:
+	- Practical: all kinds of demand (Bratman).
+	- Theoretical: cognitive load issues (Ross, Staffel, Tang).
+	- Epistemological literature has focused on the specific job post that SR opens for beliefs, but we can leave this question open and
+		- Focus on the normative issue of what are the rationality conditions of SR
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Epistemic Rationality?
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### Propositional Rationality in Tennis Match
+
+- Proponents of the Cognitive Limitations Account give rationality conditions on the doxastic states resulting from SR.
+- Specifically, [Ross&Schroeder (2014, 273-285)](https://philpapers.org/rec/ROSBCA-4) suggest conditions on correctness, stability, and consistency.
+</div>
+
+<aside class="notes"><ul>
+<li><strong>Important:</strong> Ross&amp;Schroeder talk about rationality conditions on <em>outright belief</em>, but my broad focus on doxastic states allows to extend these conditions on <em>credences</em>.</li>
+<li>I am going to go over stability, sufficient evidence, and consistency very quickly, because I will put my focus on correctness.</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="callout callout-color8">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-list" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+Epistemic Rationality Conditions on Simplified Reasoning
+
+</div>
+</div>
+<div class="callout-content">
+
+**Procedural Rationality:** Rationality consists in striking an optimal balance between "maximizing expected cognitive costs and maximizing the expected value of the agent's deliberative conclusions" (274).
+
+**Correctness:** To have a doxastic state about p when p is true constitutes being right about  whether p.
+
+**Stability:** A fully rational agent does not change her doxastic states purely in virtue of an evidentially irrelevant change in her credences or preferences.
+
+**Sufficient Evidence:** It is rational to have a doxastic state towards a proposition p only if, on balance, the evidence favors p over ¬p (for the case of beliefs) or favors some level x of credence such that x surpasses a credal threshold.
+
+**Consistency:** Rationality requires that doxastic states avoid logical inconsistencies (in the case of beliefs) and violations of the axioms of probability.
+
+</div>
+</div>
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center" align="center" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="https://i.imgur.com/NhWdsWz.png" alt="" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- There is something in SR that can be called the agent's deliberative standpoint
+- From this deliberative standpoint, SR can seem a rational thing to do.
+- But we usually assume another standpoint, that of the evaluative standpoint that measures the agent's performance (from its own first-person standpoint after the fact or from a third-person standpoint).
+- This is because we want to know how good an agent performed in terms of getting things right, given her evidence.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### The Problem with Procedural Rationality
+
+- Proponents of the Cognitive Limitations Account of SR have acknowledged that they hold a heuristic view of doxastic states:
+	- [Ross&Schroeder (2014, 274)](https://philpapers.org/rec/ROSBCA-4): "belief is a kind of heuristic" (274)
+	- [Staffel, 2019](https://philpapers.org/rec/STAHDB): "It is a matter of active debate how we can characterize the algorithm human thinkers use when reasoning with and updating their credences, but there seems to be little doubt that it is some kind of heuristic and not a full Bayesian algorithm." (9)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- Empirical research has mounted (see [Weisberg, 2021, §2](https://philpapers.org/rec/WEIBIP)) evidence against people being perfectly rational in the sense of respecting the axioms of probability or of taking options
+- Biases don't strike the balance that proponents of the Cognitive Limitations Account allege.
+- My point now will be to argue that failures in SR are to be distinguished when assessed from
+	- The deliberative standpoint.
+	- The evaluative standpoint.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- What I mean by the _deliberative standpoint_ is the standpoint of the agent choosing between cognitive options constrained by her evidence and cognitive limitations.
+- Proponents of Cognitive Limitations Accounts can (and indeed do) incorporate this in their theories by appealing to the defeasibility of the disposition to simplify reasoning.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- Defeasibility means various things, but in the context of dispositions to _take propositions for granted in one's reasoning_ can be interpreted in the following way:
+	- Defeated dispositions treat a proposition _p_ for granted reveal conditions under which the general competence is _ideally exercised_.
+	- In general, every competence involves ideal conditions (**C**) of its exercise.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- T = the general competence to take propositions for granted.
+- Counterfactually, from the deliberative standpoint, a defeated T reveals conditions C that, had not been in place, would have resulted in a better performance in terms of correctness.
+- Lack of conditions C can result in bad performance in terms of correctness, i.e., getting things wrong.
+- But the general epistemic competence T as far as it has to do with the dealing of the evidentially relevant factors of the cognitive decision problem needs can be masked  by evidentially irrelevant factors.
+- So, if epistemic rationality is a set of rules that licences the formation of doxastic states, it can be divided into
+	- Deliberative rules for guiding oneself from the deliberative standpoint.
+	- Evaluative rules for assessing one's performance in light of what the evidence supports.
+
+<!-- .element: style="font-size: 24px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<img src="attachments/bolognese.jpg" alt="" style="width: 700px; object-fit: fill">
+
+
+<p style="font-size:10px">shoutouts to <a href="https://unsplash.com/@dacakockica?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">danijela prijovic</a> on <a href="https://unsplash.com/photos/qits91IZv1o?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">unsplash!</a> </p>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="callout callout-color8">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-list" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+Example: Agent-Relative Bolognese; see [Schoenfield, 2012, p. 13](https://www.miriamschoenfield.com/F/two-notions-of-epistemic.pdf)
+
+</div>
+</div>
+<div class="callout-content">
+
+I have a delicious recipe for Bolognese sauce. My friend Jones asked me for the recipe. She is very good at chopping vegetables and the roughly right temperatures for each of the ingredients, so I just copy and paste the recipe for her over the chat. Now, my other friend Smith is a beginner in the cooking business. So, wanting her to succeed for her dinner party with all the family, I adapt the recipe for Smith and include some more basic instructions, along with indications about the order of cooking and the right temperatures. I might want to even have a videocall with Smith to see how the cooking is going.
+
+</div>
+</div>
+<!-- .element: style="font-size: 30px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- Why I don't just give Smith the same recipe I gave to Jones?
+- Smith will likely have a bad performance with the recipe that I gave to Smith.
+- Smith's general competence for cooking is less refined and, thus, more prone to make mistakes when recipes are not sufficiently specific or when there is no supervision.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+- Hypothesis: Empirical evidence that reveals biases in people's reasoning reveals correctness failures and failures of conditions C that bear upon the general competence T of taking propositions for granted.
+- Empirical literature that shows failures in cognitive performance in judgement and decision-making reveal interesting facts about the conditions C that make SR successful.
+- This don't necessarily means that SR is irrational.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### So there we have it...
+
+##### The epistemic rationality of simplified reasoning:
+1. Different factors trigger simplification:
+	1. Practical: all kinds of demands.
+	2. Theoretical: cognitive load issues.
+2. Epistemological literature has focused on the specific job post that SR opens for beliefs, but we can also focus on the normative issue of what are the rationality conditions of SR
+3. Assuming that we are only interested in the correctness of our doxastic states, rationality conditions of simplified reasoning need to take into account the deliberative standpoint, the evaluative standpoint, and the conditions under which the general competence of taking things for granted in one's reasoning can result in good performances
+
+<!-- .element: style="font-size: 30px" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Thank you!
+
+<img src="attachments/kittens.jpg" alt="" style="width: 500px; object-fit: fill">
+
+
+<p style="font-size:10px">shoutouts to <a href="https://unsplash.com/@theluckyneko?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">the lucky neko</a> on <a href="https://unsplash.com/images/animals/kitten?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">unsplash!</a> </p>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### References
+
+<i class="fas fa-book fa-1x"></i>
+
+- [Bratman, M. E. (1992). Practical Reasoning and Acceptance in a Context. Mind, 101(401), 1–16.](https://philpapers.org/rec/BRAPRA)
+- [Harman, G. (1986). Change in view: Principles of reasoning. MIT Press.](https://philpapers.org/rec/HARCIV)
+- [Tang, W. H. (2015). Belief and Cognitive Limitations. Philosophical Studies, 172(1), 249–260.](https://philpapers.org/rec/TANBAC)
+- [Ross, J., & Schroeder, M. (2014). Belief, Credence, and Pragmatic Encroachment. Philosophy and Phenomenological Research, 88(2), 259–288.](https://philpapers.org/rec/ROSBCA-4)
+- [Staffel, J. (2019). How Do Beliefs Simplify Reasoning? Noûs, 53(4), 937–962.](https://philpapers.org/rec/STAHDB)
+- [Weisberg, J. (2020). Belief in Psyontology. Philosophers’ Imprint, 20(11)](https://philpapers.org/rec/WEIBIP).
+
+
+<!-- .element: style="font-size: 20px; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left" -->
+
+<br>
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+        ],
+
+
+    	allottedTime: 2000 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+			]
+		},
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"controls":true,"progress":true,"slideNumber":false,"transition":"slide","transitionSpeed":"default"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
